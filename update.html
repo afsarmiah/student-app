@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School App</title>
+
+  <!-- THIRD PARTY STYLES -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+
+  <!-- THIRD PARTY SCRIPTS -->
+
+  <!-- OUR STYLES -->
+
+  <link rel="stylesheet" href="styles/generics.css">
+  <link rel="stylesheet" href="styles/styles.css">
+
+
+
+  <!-- OUR SCRIPTS -->
+
+  <script type="module" src="scripts/index.js"></script>
+
+</head>
+
+<body>
+  <header class="student-header">
+    <div class="student-wrapper">
+      <a href="/">
+        <h1 class="student-header__title">Student Enrollment System</h1>
+      </a>
+      <a class="student-header__button button" href="/">Back to Students</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="form-card">
+      <h2 class="form-card__title">Update Student</h2>
+
+      <form name="update-student" class="student-form">
+        <div class="form-row">
+          <label for="name" class="label">Name</label>
+          <input type=" text" id="name" name="name" placeholder="Enter student name" class="input" required>
+          <label for="name" class="error" aria-live="polite"></label>
+        </div>
+
+        <div class="form-row">
+          <label for="age" class="label">Age</label>
+          <input type="number" id="age" name="age" placeholder="Enter age" class="input" required>
+          <label for="age" class="error" aria-live="polite"></label>
+        </div>
+
+        <div class="form-row">
+          <label for="gender" class="label">Gender</label>
+          <select id="gender" name="gender" class="select" required>
+            <option value="">Select gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="year" class="label">Year Group</label>
+          <select id="year" name="year" class="select" required>
+            <option value="">Select year group</option>
+            <option>Year 7</option>
+            <option>Year 8</option>
+            <option>Year 9</option>
+            <option>Year 10</option>
+            <option>Year 11</option>
+            <option>Year 12</option>
+            <option>Year 13</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="course" class="label">Course</label>
+          <input type="text" id="course" name="course" placeholder="Enter course" class="input">
+          <label for="course" class="error" aria-live="polite"></label>
+        </div>
+
+        <div class="form-row checkbox-row">
+          <label for="enrolled" class="label">Enrolled</label>
+          <input type="checkbox" id="enrolled" name="enrolled" class="input">
+        </div>
+
+        <div class="form-actions">
+          <button type="reset" class="secondary-btn button">Reset</button>
+          <button type="submit" class="primary-btn button">Add Student</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+</body>
+
+</html>
