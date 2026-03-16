@@ -30,60 +30,74 @@
 <body>
   <header class="student-header">
     <div class="student-wrapper">
-      <h1 class="student-header__title">Student Enrollment System</h1>
-      <a class="student-header__button button" href="">Add Student</a>
+      <a href="/">
+        <h1 class="student-header__title">Student Enrollment System</h1>
+      </a>
+      <a class="student-header__button button" href="/">Back to Students</a>
     </div>
   </header>
 
   <main>
-    <table class="student-table">
-      <thead class="student-table__header">
-        <tr class="student-table__row">
-          <th class="student-table__title">Name</th>
-          <th class="student-table__title">Age</th>
-          <th class="student-table__title">Year Group</th>
-          <th class="student-table__title">Course</th>
-          <th class="student-table__title">Status</th>
-          <th class="student-table__title">Actions</th>
-        </tr>
-      </thead>
-      <tbody class="student-table__body">
-        <tr class="student-table__body-row">
-          <td class="student-table__name">Afsar Miah</td>
-          <td class="student-table-info">25</td>
-          <td class="student-table-info">Year 12</td>
-          <td class="student-table-info">Maths</td>
-          <td class="student-table-pending">Pending</td>
-          <td>
-            <a class="student-table__update-button" href="">Update</a>
-            <button class="student-table__delete-button">Delete</button>
-          </td>
-        </tr>
-        <tr class="student-table__body-row">
-          <td class="student-table__name">Lily</td>
-          <td class="student-table-info">26</td>
-          <td class="student-table-info">Year 13</td>
-          <td class="student-table-info">English</td>
-          <td class="student-table-pending">Pending</td>
-          <td>
-            <a class="student-table__update-button" href="">Update</a>
-            <button class="student-table__delete-button">Delete</button>
-          </td>
-        </tr>
-        <tr class="student-table__body-row">
-          <td class="student-table__name">Koysor Miah</td>
-          <td class="student-table-info">28</td>
-          <td class="student-table-info">Year 15</td>
-          <td class="student-table-info">Biology</td>
-          <td class="student-table-pending">Pending</td>
-          <td>
-            <a class="student-table__update-button" href="">Update</a>
-            <button class="student-table__delete-button ">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="form-card">
+      <h2 class="form-card__title">Add Student</h2>
+
+      <form name="add-student" class="student-form">
+        <div class="form-row">
+          <label for="name" class="label">Name</label>
+          <input type=" text" id="name" name="name" placeholder="Enter student name" class="input" required>
+          <label for="name" class="error" aria-live="polite"></label>
+        </div>
+
+        <div class="form-row">
+          <label for="age" class="label">Age</label>
+          <input type="number" id="age" name="age" placeholder="Enter age" class="input" required>
+          <label for="age" class="error" aria-live="polite"></label>
+        </div>
+
+        <div class="form-row">
+          <label for="gender" class="label">Gender</label>
+          <select id="gender" name="gender" class="select" required>
+            <option value="">Select gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="year" class="label">Year Group</label>
+          <select id="year" name="year" class="select" required>
+            <option value="">Select year group</option>
+            <option>Year 7</option>
+            <option>Year 8</option>
+            <option>Year 9</option>
+            <option>Year 10</option>
+            <option>Year 11</option>
+            <option>Year 12</option>
+            <option>Year 13</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="course" class="label">Course</label>
+          <input type="text" id="course" name="course" placeholder="Enter course" class="input" required>
+          <label for="course" class="error" aria-live="polite"></label>
+        </div>
+
+        <div class="form-row checkbox-row">
+          <label for="enrolled" class="label">Enrolled</label>
+          <input type="checkbox" id="enrolled" name="enrolled" class="input">
+
+        </div>
+
+        <div class="form-actions">
+          <button type="reset" class="secondary-btn button">Reset</button>
+          <button type="submit" class="primary-btn button">Add Student</button>
+        </div>
+      </form>
+    </div>
   </main>
+
 </body>
 
 </html>
