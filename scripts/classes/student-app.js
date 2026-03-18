@@ -40,16 +40,14 @@ class SchoolAdmin extends schoolManager {
   }
 
   markAsEnrolled(id) {
-    const result = super.updateStudent;
-    updateStudent(id, { isFullyEnrolled: true });
+    const result = super.updateStudent(id, { isFullyEnrolled: true });
     this.persistData();
     console.log(result);
     return result;
   }
 
   markAsNotEnrolled(id) {
-    const result = super.updateStudent;
-    updateStudent(id, { isFullyEnrolled: false });
+    const result = super.updateStudent(id, { isFullyEnrolled: false });
     this.persistData();
     console.log(result);
     return result;
@@ -57,6 +55,7 @@ class SchoolAdmin extends schoolManager {
 
   createAppStudent(data) {
     const studentId = super.createStudent(data);
+    console.log(studentId);
     return studentId;
   }
 
@@ -86,17 +85,19 @@ class SchoolAdmin extends schoolManager {
 
   getAllStudents() {
     return super.render(function (students) {
+      console.log(students);
       return students;
     });
   }
 
-  getStudentsById(id) {
+  getStudentById(id) {
     const student = super.render(function (students) {
       const s = students.find(({ studentid }) => studentid === id);
       console.log(s);
+
       return s;
     });
-    console.log(student);
+
     return student;
   }
 
