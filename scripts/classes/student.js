@@ -7,7 +7,7 @@ export default class Student {
     gender,
     year,
     course,
-    isFullyEnrolled = false,
+    enrolled = false,
     studentid = nanoid(),
   } = {}) {
     if (typeof name !== 'string') {
@@ -38,7 +38,7 @@ export default class Student {
       throw new Error(`The course must not be empty`);
     }
 
-    if (typeof isFullyEnrolled !== 'boolean') {
+    if (typeof enrolled !== 'boolean') {
       throw new Error(`This must be a boolean value`);
     }
 
@@ -51,7 +51,7 @@ export default class Student {
     this.gender = gender;
     this.year = year;
     this.course = course;
-    this.isFullyEnrolled = isFullyEnrolled;
+    this.enrolled = enrolled;
     this.studentid = studentid;
 
     // Object.freeze(this);

@@ -1,6 +1,5 @@
 function serialize(form) {
   const formData = new FormData(form);
-  console.log(formData);
   const data = Object.fromEntries(formData);
   console.log(data);
 
@@ -112,4 +111,10 @@ function validate(input) {
   if (validityState.valueMissing) {
     errorLabel.textContent = 'This field be must filled out!';
   }
+
+  if (validityState.valid) {
+    console.log('valid', validityState);
+  }
 }
+
+export { serialize, populate, resetAllFormFields, validate };
