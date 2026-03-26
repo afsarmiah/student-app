@@ -91,15 +91,25 @@ class SchoolAdmin extends schoolManager {
     });
   }
 
-  getStudentById(id) {
-    const student = super.render(function (students) {
-      const s = students.find(({ studentid }) => studentid === id);
-      console.log(s);
+  // getStudentById(id) {
+  //   const student = super.render(function (students) {
+  //     const s = students.find(({ studentid }) => studentid === id);
+  //     console.log(s);
 
-      return s;
+  //     return s;
+  //   });
+
+  //   return student;
+  // }
+
+  getStudentById(id) {
+    let found;
+
+    super.render(function (students) {
+      found = students.find(({ studentid }) => studentid === id);
     });
 
-    return student;
+    return found;
   }
 
   render({

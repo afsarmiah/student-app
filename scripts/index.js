@@ -137,4 +137,110 @@ if (addForm) {
   });
 }
 
+if (updateForm) {
+  updateForm.addEventListener('reset', (e) => {
+    resetAllFormFields(updateForm);
+  });
+
+  updateForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const studentData = serialize(updateForm);
+    console.log('studentData', studentData);
+
+    const { _id, ...data } = studentData;
+    console.log('id', _id);
+    console.log('pre data', data);
+
+    if (!('enrolled' in data)) {
+      data.enrolled = false;
+    } else if (data.enrolled === 'on') {
+      data.enrolled = true;
+    }
+
+    console.log('post data', data);
+    benJonsonPrimarySchool.updateAppStudent(_id, data);
+  });
+
+  const submitButton = document.querySelector('[type= "submit"]');
+  submitButton.setAttribute('disabled', 'disabled');
+
+  const controlSubmitButton = (e) => {
+    console.log('form input');
+    if (updateForm.matches(':valid')) {
+      console.log('valid');
+      submitButton.removeAttribute('disabled');
+    } else {
+      console.log('invalid');
+      submitButton.setAttribute('disabled', 'disabled');
+    }
+  };
+
+  updateForm.addEventListener('input', controlSubmitButton);
+  updateForm.addEventListener('change', controlSubmitButton);
+
+  const nameField = updateForm['name'];
+  const ageField = updateForm['age'];
+  const genderField = updateForm['gender'];
+  const yearField = updateForm['year'];
+  const courseField = updateForm['course'];
+
+  nameField.addEventListener('input', (e) => {
+    validate(nameField);
+  });
+  nameField.addEventListener('change', (e) => {
+    validate(nameField);
+  });
+
+  ageField.addEventListener('input', (e) => {
+    validate(ageField);
+  });
+  ageField.addEventListener('change', (e) => {
+    validate(ageField);
+  });
+
+  genderField.addEventListener('input', (e) => {
+    validate(genderField);
+  });
+  genderField.addEventListener('change', (e) => {
+    validate(genderField);
+  });
+
+  yearField.addEventListener('input', (e) => {
+    validate(yearField);
+  });
+  yearField.addEventListener('change', (e) => {
+    validate(yearField);
+  });
+
+  courseField.addEventListener('input', (e) => {
+    validate(courseField);
+  });
+  courseField.addEventListener('change', (e) => {
+    validate(courseField);
+  });
+
+  const url = new URL(location);
+  console.log(url);
+  const params = new URLSearchParams(url.search);
+  console.log('params', params);
+  const id = params.get('id');
+
+  if (!id) {
+    console.log(`the id does not exist`);
+  } else {
+    const student = benJonsonPrimarySchool.getStudentById(id);
+    console.log('student', student);
+    if (!student) {
+      console.log(`Error: student with ${id} not found`);
+    } else {
+      const data = {
+        ...student,
+        enrolled: student.enrolled ? 'on' : undefined,
+      };
+      populate(updateForm, data);
+    }
+  }
+}
+
 benJonsonPrimarySchool.render();
