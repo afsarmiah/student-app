@@ -13,12 +13,6 @@ const tbody = document.querySelector('.student-table__body');
 const addForm = document.forms['add-student'];
 const updateForm = document.forms['update-student'];
 
-// const renderOptions = {
-//   fn: function ({ students }) {
-//     return renderStudents({ students });
-//   },
-// };
-
 if (tbody) {
   // Initial render
   benJonsonPrimarySchool.render({
