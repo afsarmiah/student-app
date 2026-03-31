@@ -8,53 +8,57 @@ import {
 // import Student from './classes/student.js';
 
 const benJonsonPrimarySchool = new SchoolAdmin({ headteacher: 'Afsar' });
-console.log(benJonsonPrimarySchool);
 
-// const student1 = benJonsonPrimarySchool.createAppStudent({
-//   name: 'Afsar',
-//   age: 25,
-//   gender: 'Male',
-//   year: 'Year 9',
-//   course: 'Math',
-// });
-
-// const student2 = benJonsonPrimarySchool.createAppStudent({
-//   name: 'Lily',
-//   age: 26,
-//   gender: 'Female',
-//   year: 'Year 10',
-//   course: 'English',
-// });
-
-// benJonsonPrimarySchool.render({
-//   fn: function ({ headteacher, students }) {
-//     console.log(headteacher);
-//     console.table(students);
-//   },
-// });
-
-// benJonsonPrimarySchool.render();
-
-// benJonsonPrimarySchool.updateAppStudent(student1, { course: 'Biology' });
-
-// benJonsonPrimarySchool.render();
-
-// benJonsonPrimarySchool.removeAppStudent(student2);
-
-// benJonsonPrimarySchool.markAsEnrolled(student1);
-
-// benJonsonPrimarySchool.render();
-
-// benJonsonPrimarySchool.markAsNotEnrolled(student1);
-
-// benJonsonPrimarySchool.render();
-
-// benJonsonPrimarySchool.getAllStudents();
-
-// benJonsonPrimarySchool.getStudentById(student1);
-
+const tbody = document.querySelector('.student-table__body');
 const addForm = document.forms['add-student'];
 const updateForm = document.forms['update-student'];
+
+// const renderOptions = {
+//   fn: function ({ students }) {
+//     return renderStudents({ students });
+//   },
+// };
+
+if (tbody) {
+  // Initial render
+  benJonsonPrimarySchool.render({
+    fn: function (students) {
+      return renderStudents(students);
+    },
+  });
+
+  // Event delegation for Delete and Enrol buttons
+  tbody.addEventListener('click', (e) => {
+    const clicked = e.target;
+
+    if (
+      !clicked?.matches?.(
+        '.student-table__delete-button, .student-table__enrol-button',
+      )
+    )
+      return;
+
+    const { id } = clicked.dataset;
+    console.log('id from dataset', id);
+    const row = clicked.closest('tr');
+    console.log(row);
+
+    if (clicked.matches('.student-table__delete-button')) {
+      benJonsonPrimarySchool.removeAppStudent(id);
+      row.remove();
+
+      // Show "no students" message if table is now empty
+      if (!tbody.children.length) {
+        renderStudents({ students: [] });
+      }
+
+      // Rebuild just this row with fresh data
+      // const updatedStudent = benJonsonPrimarySchool.getStudentById(id);
+      // const newRow = createStudentRow(updatedStudent);
+      // row.replaceWith(newRow);
+    }
+  });
+}
 
 if (addForm) {
   addForm.addEventListener('reset', (e) => {
@@ -67,12 +71,6 @@ if (addForm) {
     const form = addForm;
 
     const data = serialize(form);
-
-    if (!('enrolled' in data)) {
-      data.enrolled = false;
-    } else if (data.enrolled === 'on') {
-      data.enrolled = true;
-    }
 
     benJonsonPrimarySchool.createAppStudent(data);
 
@@ -148,18 +146,12 @@ if (updateForm) {
     const studentData = serialize(updateForm);
     console.log('studentData', studentData);
 
-    const { _id, ...data } = studentData;
-    console.log('id', _id);
+    const { studentid, ...data } = studentData;
+    console.log('studentid', studentid);
     console.log('pre data', data);
 
-    if (!('enrolled' in data)) {
-      data.enrolled = false;
-    } else if (data.enrolled === 'on') {
-      data.enrolled = true;
-    }
-
     console.log('post data', data);
-    benJonsonPrimarySchool.updateAppStudent(_id, data);
+    benJonsonPrimarySchool.updateAppStudent(studentid, data);
   });
 
   const submitButton = document.querySelector('[type= "submit"]');
@@ -225,6 +217,7 @@ if (updateForm) {
   const params = new URLSearchParams(url.search);
   console.log('params', params);
   const id = params.get('id');
+  console.log('id', id);
 
   if (!id) {
     console.log(`the id does not exist`);
@@ -236,11 +229,88 @@ if (updateForm) {
     } else {
       const data = {
         ...student,
-        enrolled: student.enrolled ? 'on' : undefined,
       };
+      console.log('data', data);
       populate(updateForm, data);
     }
   }
 }
 
-benJonsonPrimarySchool.render();
+function createStudentRow(student) {
+  console.log('createstudent', student);
+  const { name, age, gender, year, course, studentid } = student;
+  console.log(name);
+  console.log(age);
+  console.log(gender);
+  console.log(year);
+  console.log(course);
+  console.log(studentid);
+
+  const tr = document.createElement('tr');
+  tr.classList.add('student-table__body-row');
+
+  const fields = [name, age, gender, year, course];
+  console.log('field', fields);
+
+  fields.forEach((field, index) => {
+    const td = document.createElement('td');
+
+    if (index === 0) {
+      td.classList.add('student-table__name');
+    } else {
+      td.classList.add('student-table-info');
+    }
+
+    td.textContent = field;
+    tr.append(td);
+  });
+
+  // const statusTd = document.createElement('td');
+  // statusTd.textContent = enrolled ? 'Enrolled' : 'Pending';
+  // statusTd.classList.add(
+  //   enrolled ? 'student-table-enrolled' : 'student-table-pending',
+  // );
+  // tr.append(statusTd);
+
+  const actionsTd = document.createElement('td');
+
+  const updatelink = document.createElement('a');
+  updatelink.href = `/update.html?id=${studentid}`;
+  updatelink.classList.add('student-table__update-button', 'button');
+  updatelink.textContent = 'Update';
+
+  const deleteButton = document.createElement('button');
+  deleteButton.classList.add('student-table__delete-button');
+  deleteButton.dataset.id = studentid;
+  deleteButton.textContent = 'Delete';
+
+  actionsTd.append(updatelink, deleteButton);
+  tr.append(actionsTd);
+
+  return tr;
+}
+
+function renderStudents({ students = [] } = {}) {
+  console.log('renderstudent', students);
+
+  const tbody = document.querySelector('.student-table__body');
+  if (!tbody) return;
+
+  const fragment = document.createDocumentFragment();
+
+  if (!students.length) {
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.setAttribute('colspan', '7');
+    td.classList.add('no-students-message');
+    td.textContent = 'You have no students to display!';
+    tr.append(td);
+    fragment.append(tr);
+  } else {
+    for (const student of students) {
+      fragment.append(createStudentRow(student));
+    }
+  }
+
+  tbody.replaceChildren(fragment);
+}

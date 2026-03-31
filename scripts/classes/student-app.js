@@ -39,20 +39,6 @@ class SchoolAdmin extends schoolManager {
     }
   }
 
-  markAsEnrolled(id) {
-    const result = super.updateStudent(id, { enrolled: true });
-    this.persistData();
-    console.log(result);
-    return result;
-  }
-
-  markAsNotEnrolled(id) {
-    const result = super.updateStudent(id, { enrolled: false });
-    this.persistData();
-    console.log(result);
-    return result;
-  }
-
   createAppStudent(data) {
     const studentId = super.createStudent(data);
     console.log(studentId);
@@ -103,13 +89,15 @@ class SchoolAdmin extends schoolManager {
   // }
 
   getStudentById(id) {
-    let found;
+    let student;
 
     super.render(function (students) {
-      found = students.find(({ studentid }) => studentid === id);
+      student = students.find(({ studentid }) => studentid === id);
     });
 
-    return found;
+    console.log(student);
+
+    return student;
   }
 
   render({

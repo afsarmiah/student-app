@@ -2,10 +2,6 @@
   --primary-blue: hsl(223, 100%, 59%); /* used */
   --primary-blue-hover: hsl(223, 76%, 48%); /* used */
   --primary-blue-light: hsl(219, 100%, 95%); /* used */
-  --enrolled-green: hsl(142, 71%, 45%);
-  --enrolled-background: hsl(141, 84%, 93%);
-  --pending-yellow: hsl(38, 92%, 50%);
-  --pending-background: hsl(48, 96%, 89%);
   --delete-red: hsl(0, 84%, 60%); /* used */
   --delete-hover: hsl(0, 72%, 51%); /* used */
   --warning-background: hsl(0, 93%, 94%);
@@ -223,4 +219,10 @@ label.error {
   font-size: 1.4rem;
   color: #d32f2f; /* red error color */
   font-weight: 500;
+}
+
+.student-table th:last-child,
+.student-table td:last-child {
+  width: 1%;
+  white-space: nowrap;
 }

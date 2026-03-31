@@ -1,15 +1,7 @@
 import { nanoid } from 'https://esm.sh/nanoid';
 
 export default class Student {
-  constructor({
-    name,
-    age,
-    gender,
-    year,
-    course,
-    enrolled = false,
-    studentid = nanoid(),
-  } = {}) {
+  constructor({ name, age, gender, year, course, studentid = nanoid() } = {}) {
     if (typeof name !== 'string') {
       throw new Error(`The name must be a string and not ${typeof name}`);
     }
@@ -38,10 +30,6 @@ export default class Student {
       throw new Error(`The course must not be empty`);
     }
 
-    if (typeof enrolled !== 'boolean') {
-      throw new Error(`This must be a boolean value`);
-    }
-
     if (!studentid) {
       throw new Error(`The Student ID must not be empty`);
     }
@@ -51,9 +39,7 @@ export default class Student {
     this.gender = gender;
     this.year = year;
     this.course = course;
-    this.enrolled = enrolled;
     this.studentid = studentid;
-
     // Object.freeze(this);
   }
 }

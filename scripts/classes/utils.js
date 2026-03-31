@@ -1,3 +1,7 @@
+// const noStudentsMessage = document.createElement('td');
+// noStudentsMessage.classList.add('no-students-message');
+// noStudentsMessage.textContent = 'You have no students!';
+
 function serialize(form) {
   const formData = new FormData(form);
   const data = Object.fromEntries(formData);
@@ -101,7 +105,7 @@ function validate(input) {
   const formRow = input.closest('.form-row');
   const errorLabel = formRow.querySelector('label.error');
 
-  console.log(errorLabel);
+  console.log('errorLabel', errorLabel);
 
   errorLabel.textContent = '';
 

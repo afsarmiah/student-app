@@ -43,6 +43,7 @@
       <h2 class="form-card__title">Update Student</h2>
 
       <form name="update-student" class="student-form" novalidate>
+        <input type="hidden" name="studentid">
         <div class="form-row">
           <label for="name" class="label">Name</label>
           <input type="text" id="name" name="name" placeholder="Enter student name" class="input" required>
@@ -83,11 +84,6 @@
           <label for="course" class="label">Course</label>
           <input type="text" id="course" name="course" placeholder="Enter course" class="input">
           <label for="course" class="error" aria-live="polite"></label>
-        </div>
-
-        <div class="form-row checkbox-row">
-          <label for="enrolled" class="label">Enrolled</label>
-          <input type="checkbox" id="enrolled" name="enrolled" class="input">
         </div>
 
         <div class="form-actions">
